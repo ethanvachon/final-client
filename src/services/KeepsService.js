@@ -7,6 +7,10 @@ class KeepsService {
     AppState.currentKeeps = res.data
   }
 
+  async addView(id) {
+    await api.put('api/keeps/' + id + '/addview')
+  }
+
   // async getOne(id) {
   //   const res = await api.get('api/keeps' + id)
   // }
