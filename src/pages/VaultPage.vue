@@ -2,6 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
+        <i class="fas fa-backspace" v-if="state.account.id == state.vault.creatorId" @click="deleteVault()"></i>
         <h1>{{ state.vault.name }}</h1>
         <h3>{{ state.vault.description }}</h3>
       </div>
@@ -12,15 +13,18 @@
   </div>
 </template>
 <script>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { computed, reactive, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { vaultsService } from '../services/VaultsService'
+
 export default {
   name: 'Vault',
   setup() {
+    const router = useRouter()
     const route = useRoute()
     const state = reactive({
+      account: computed(() => AppState.account),
       vault: computed(() => AppState.selectedVault),
       keeps: computed(() => AppState.currentKeeps)
     })
@@ -29,7 +33,12 @@ export default {
       vaultsService.getKeepsByVault(route.params.id)
     })
     return {
-      state
+      state,
+      deleteVault() {
+        confirm('are you sure you want to delete')
+        vaultsService.delete(state.vault.id)
+        router.push({ path: '/' })
+      }
     }
   }
 }

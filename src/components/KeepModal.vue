@@ -6,7 +6,7 @@
 
   <!-- Modal -->
   <div class="modal fade"
-       id="modelId"
+       :id="'keep' + keep.id"
        tabindex="-1"
        role="dialog"
        aria-labelledby="modelTitleId"
@@ -53,11 +53,18 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
+          <div v-if="state.addKeep == true">
+            <div v-for="vault in state.vaults" :key="vault.id">
+              <button class="btn btn-primary" @click="addKeepToVault(vault.id)">
+                {{ vault.name }}
+              </button>
+            </div>
+          </div>
+          <button class="btn btn-primary" v-if="state.addKeep == false" @click="getVaults">
+            Add to vault
           </button>
-          <button @click="test()">
-            test
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
+            Close
           </button>
         </div>
       </div>
@@ -69,12 +76,16 @@ import { reactive, computed } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 import { profilesService } from '../services/ProfilesService'
+import { accountService } from '../services/AccountService'
+import { vaultKeepsService } from '../services/VaultKeepsService'
 // import { keepsService } from '../services/KeepsService'
 export default {
   props: ['keep', 'page'],
   setup(props) {
     const state = reactive({
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      addKeep: false,
+      vaults: computed(() => AppState.currentVaults)
     })
     return {
       state,
@@ -82,6 +93,7 @@ export default {
         console.log(props.keep)
       },
       deleteKeep() {
+        confirm('are you sure you want to delete')
         keepsService.delete(props.keep.id)
         // eslint-disable-next-line no-constant-condition
         if (props.page === 'account' || 'profile') {
@@ -89,6 +101,17 @@ export default {
         } else if (props.page === 'home') {
           keepsService.getKeeps()
         }
+      },
+      getVaults() {
+        accountService.getVaultsByAccount()
+        state.addKeep = true
+      },
+      addKeepToVault(id) {
+        const vk = {}
+        vk.keepId = props.keep.id
+        vk.vaultId = id
+        vaultKeepsService.createVaultKeep(vk)
+        state.addKeep = false
       }
     }
   }

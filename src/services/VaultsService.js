@@ -23,7 +23,7 @@ class VaultsService {
   }
 
   async delete(id) {
-    const res = await api.delete('api/vaults' + id)
+    const res = await api.delete('api/vaults/' + id)
     console.log(res)
   }
 }

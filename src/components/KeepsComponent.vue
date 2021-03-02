@@ -1,6 +1,6 @@
 <template>
   <div class="col-4">
-    <div class="my-2">
+    <!-- <div class="my-2">
       <div class="card"
            @click="state.addView()"
            type="button"
@@ -15,6 +15,20 @@
           <img :src="keep.creator.picture" alt="">
         </div>
       </div>
+    </div> -->
+    <img @click="state.addView()"
+         type="button"
+         data-toggle="modal"
+         :data-target="'#keep' + keep.id"
+         :src="keep.img"
+         alt=""
+         class="img-fluid my-3"
+    >
+    <div class="keep-text d-flex">
+      <h3 class="text-white mr-5 mb-0">
+        {{ keep.name }}
+      </h3>
+      <img :src="keep.creator.picture" id="profile-img" class="ml-3">
     </div>
   </div>
   <keep-modal :keep="props.keep" :page="props.page" />
@@ -40,13 +54,22 @@ export default {
 }
 </script>
 <style scoped>
-  .card {
+  /* .card {
     width:100%;
     height: 300px;
     border-radius: 5px;
     background-size:cover !important;
+  } */
+  .img-fluid {
+    border-radius: 5px;
   }
-  img {
+  .keep-text {
+    position: absolute;
+    z-index: 15;
+    bottom: 3vh;
+    left: 2vw;
+  }
+  #profile-img {
     height: 5vh;
     width: auto;
     border-radius: 100%;
