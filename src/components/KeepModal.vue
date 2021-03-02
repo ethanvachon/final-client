@@ -60,7 +60,7 @@
               </button>
             </div>
           </div>
-          <button class="btn btn-primary" v-if="state.addKeep == false" @click="getVaults">
+          <button class="btn btn-primary" v-if="state.addKeep == false && state.user.isAuthenticated" @click="getVaults">
             Add to vault
           </button>
           <button type="button" class="btn btn-primary" data-dismiss="modal">
@@ -85,7 +85,8 @@ export default {
     const state = reactive({
       account: computed(() => AppState.account),
       addKeep: false,
-      vaults: computed(() => AppState.currentVaults)
+      vaults: computed(() => AppState.currentVaults),
+      user: computed(() => AppState.user)
     })
     return {
       state,

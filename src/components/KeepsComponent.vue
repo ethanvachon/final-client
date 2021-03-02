@@ -24,12 +24,17 @@
          alt=""
          class="img-fluid my-3"
     >
+    <div v-if="page == 'vault'">
+      <p id="remove" class="text-white" @click="removeFromVault()">
+        remove
+      </p>
+    </div>
     <div class="keep-text d-flex">
       <h3 class="text-white mr-5 mb-0">
         {{ keep.name }}
       </h3>
-      <img :src="keep.creator.picture" id="profile-img" class="ml-3">
     </div>
+    <img :src="keep.creator.picture" id="profile-img" class="ml-3">
   </div>
   <keep-modal :keep="props.keep" :page="props.page" />
 </template>
@@ -37,8 +42,9 @@
 import { reactive, computed } from 'vue'
 import { keepsService } from '../services/KeepsService'
 import { AppState } from '../AppState'
+import { vaultKeepsService } from '../services/VaultKeepsService'
 export default {
-  props: ['keep', 'page'],
+  props: ['keep', 'page', 'vault'],
   setup(props) {
     const state = reactive({
       account: computed(() => AppState.account),
@@ -48,7 +54,10 @@ export default {
     })
     return {
       state,
-      props
+      props,
+      removeFromVault() {
+        vaultKeepsService.removeVaultKeep(props.keep.vaultKeepId, props.vault.id)
+      }
     }
   }
 }
@@ -60,18 +69,26 @@ export default {
     border-radius: 5px;
     background-size:cover !important;
   } */
+  #remove {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+  }
   .img-fluid {
     border-radius: 5px;
   }
   .keep-text {
     position: absolute;
     z-index: 15;
-    bottom: 3vh;
+    top: 3vh;
     left: 2vw;
   }
   #profile-img {
     height: 5vh;
     width: auto;
     border-radius: 100%;
+    position: absolute;
+    top: 3vh;
+    right: 2vw;
   }
 </style>

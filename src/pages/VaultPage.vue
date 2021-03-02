@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="row" v-if="state.keeps">
-      <keeps-component :keep="keep" v-for="keep in state.keeps" :key="keep.id" />
+      <keeps-component :keep="keep" :vault="state.vault" :page="'vault'" v-for="keep in state.keeps" :key="keep.id" />
     </div>
   </div>
 </template>
@@ -44,5 +44,4 @@ export default {
 }
 </script>
 <style scoped>
-
 </style>

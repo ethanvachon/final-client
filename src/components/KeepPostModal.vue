@@ -24,7 +24,7 @@
         </div>
         <div class="modal-body">
           <form @submit.prevent="createVault()">
-            <input type="text" v-model="state.newKeep.name" placeholder="name">
+            <input type="text" maxlength="14" v-model="state.newKeep.name" placeholder="name">
             <input type="text" v-model="state.newKeep.description" placeholder="description">
             <input type="text" v-model="state.newKeep.img" placeholder="image url">
             <button type="submit" class="btn btn-primary">
@@ -48,6 +48,7 @@ export default {
       state,
       createVault() {
         keepsService.create(state.newKeep)
+        state.newKeep = {}
       }
     }
   }
