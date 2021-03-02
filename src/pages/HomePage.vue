@@ -5,7 +5,7 @@
         <h1>Keeps</h1>
       </div>
     </div>
-    <div class="row masonry">
+    <div class="masonry">
       <keeps-component v-for="keep in state.keeps" :key="keep.id" :keep="keep" :page="'home'" />
     </div>
   </div>

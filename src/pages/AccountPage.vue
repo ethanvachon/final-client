@@ -14,7 +14,9 @@
         </button>
         <keep-post-modal />
       </div>
-      <keeps-component :keep="keep" :page="'account'" v-for="keep in state.keeps" :key="keep.id" />
+      <div class="masonry">
+        <keeps-component :keep="keep" :page="'account'" v-for="keep in state.keeps" :key="keep.id" />
+      </div>
     </div>
     <div class="row">
       <div class="col-12">
@@ -57,5 +59,8 @@ export default {
 }
 </script>
 <style scoped>
-
+.masonry {
+  column-count: 3;
+  column-gap: 2em;
+}
 </style>

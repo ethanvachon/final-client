@@ -7,7 +7,7 @@
         <h3>{{ state.vault.description }}</h3>
       </div>
     </div>
-    <div class="row" v-if="state.keeps">
+    <div class="masonry" v-if="state.keeps">
       <keeps-component :keep="keep" :vault="state.vault" :page="'vault'" v-for="keep in state.keeps" :key="keep.id" />
     </div>
   </div>
@@ -44,4 +44,8 @@ export default {
 }
 </script>
 <style scoped>
+.masonry {
+  column-count: 3;
+  column-gap: 2em;
+}
 </style>
