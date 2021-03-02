@@ -5,10 +5,8 @@
         <h1>Keeps</h1>
       </div>
     </div>
-    <div class="row">
-      <!-- <div class="col-4" v-for="keep in state.keeps" :key="keep.id"> -->
+    <div class="row masonry">
       <keeps-component v-for="keep in state.keeps" :key="keep.id" :keep="keep" :page="'home'" />
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -34,5 +32,9 @@ export default {
 </script>
 
 <style scoped>
+.masonry {
+  column-count: 3;
+  column-gap: 2em;
+}
 
 </style>

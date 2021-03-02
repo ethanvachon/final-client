@@ -1,5 +1,6 @@
 <template>
-  <div class="col-4">
+  <div class="item">
+    <!-- <div class="col-4"> -->
     <!-- <div class="my-2">
       <div class="card"
            @click="state.addView()"
@@ -36,6 +37,7 @@
     </div>
     <img :src="keep.creator.picture" id="profile-img" class="ml-3">
   </div>
+  <!-- </div> -->
   <keep-modal :keep="props.keep" :page="props.page" />
 </template>
 <script>
@@ -91,4 +93,9 @@ export default {
     top: 3vh;
     right: 2vw;
   }
+  .item {
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+}
 </style>
