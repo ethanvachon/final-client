@@ -22,6 +22,7 @@
                 </div>
               </div>
               <div class="col-6">
+                <i class="fas fa-backspace" v-if="state.account.id == keep.creatorId" @click="deleteKeep()"></i>
                 <div class="d-flex justify-content-center border-bottom">
                   <h4>{{ keep.name }}</h4>
                   <div class="d-flex justify-content-around" id="modal-stats">
@@ -64,12 +65,30 @@
   </div>
 </template>
 <script>
+import { reactive, computed } from 'vue'
+import { AppState } from '../AppState'
+import { keepsService } from '../services/KeepsService'
+import { profilesService } from '../services/ProfilesService'
+// import { keepsService } from '../services/KeepsService'
 export default {
-  props: ['keep'],
+  props: ['keep', 'page'],
   setup(props) {
+    const state = reactive({
+      account: computed(() => AppState.account)
+    })
     return {
+      state,
       test() {
         console.log(props.keep)
+      },
+      deleteKeep() {
+        keepsService.delete(props.keep.id)
+        // eslint-disable-next-line no-constant-condition
+        if (props.page === 'account' || 'profile') {
+          profilesService.getKeepsByProfile(state.account.id)
+        } else if (props.page === 'home') {
+          keepsService.getKeeps()
+        }
       }
     }
   }
@@ -89,5 +108,10 @@ export default {
 .modal-dialog {
   max-width: 80vw;
   margin: none;
+}
+.fa-backspace {
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 </style>

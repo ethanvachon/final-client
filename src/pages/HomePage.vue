@@ -7,7 +7,7 @@
     </div>
     <div class="row">
       <!-- <div class="col-4" v-for="keep in state.keeps" :key="keep.id"> -->
-      <keeps-component v-for="keep in state.keeps" :key="keep.id" :keep="keep" />
+      <keeps-component v-for="keep in state.keeps" :key="keep.id" :keep="keep" :page="'home'" />
       <!-- </div> -->
     </div>
   </div>

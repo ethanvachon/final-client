@@ -1,9 +1,9 @@
 import { AppState } from '../AppState'
 import { api } from './AxiosService'
-
+import { accountService } from '../services/AccountService'
 class VaultsService {
   async getOne(id) {
-    const res = await api.get('api/vaults' + id)
+    const res = await api.get('api/vaults/' + id)
     AppState.selectedVault = res.data
   }
 
@@ -13,8 +13,8 @@ class VaultsService {
   }
 
   async create(newVault) {
-    const res = await api.post('api/vaults', newVault)
-    console.log(res.data)
+    await api.post('api/vaults', newVault)
+    accountService.getVaultsByAccount()
   }
 
   async edit(editVault, id) {
@@ -28,4 +28,4 @@ class VaultsService {
   }
 }
 
-export const vaultKeepsService = new VaultsService()
+export const vaultsService = new VaultsService()

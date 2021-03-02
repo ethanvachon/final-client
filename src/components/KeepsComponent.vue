@@ -17,18 +17,18 @@
       </div>
     </div>
   </div>
-  <keep-modal :keep="props.keep">
-  </keep-modal>
+  <keep-modal :keep="props.keep" :page="props.page" />
 </template>
 <script>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { keepsService } from '../services/KeepsService'
+import { AppState } from '../AppState'
 export default {
-  props: ['keep'],
+  props: ['keep', 'page'],
   setup(props) {
     const state = reactive({
+      account: computed(() => AppState.account),
       addView() {
-        console.log(props.keep)
         keepsService.addView(props.keep.id)
       }
     })

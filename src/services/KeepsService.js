@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { api } from './AxiosService'
+import { profilesService } from '../services/ProfilesService'
 
 class KeepsService {
   async getKeeps() {
@@ -15,8 +16,9 @@ class KeepsService {
   //   const res = await api.get('api/keeps' + id)
   // }
   async create(newKeep) {
-    const res = await api.post('api/keeps', newKeep)
-    console.log(res.data)
+    await api.post('api/keeps', newKeep)
+    const id = AppState.account.id
+    profilesService.getKeepsByProfile(id)
   }
 
   async edit(id, editKeep) {
@@ -25,7 +27,7 @@ class KeepsService {
   }
 
   async delete(id) {
-    const res = await api.delete('api/keeps' + id)
+    const res = await api.delete('api/keeps/' + id)
     console.log(res.data)
   }
 }

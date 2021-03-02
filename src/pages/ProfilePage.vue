@@ -10,8 +10,16 @@
       <div class="col-12">
         <h2>Keeps</h2>
       </div>
-      <div class="col-3" v-for="keep in state.keeps" :key="keep.id">
-        <keeps-component :keep="keep" />
+      <keeps-component :keep="keep" :page="'profile'" v-for="keep in state.keeps" :key="keep.id" />
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h2>Vaults</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3" v-for="vault in state.vaults" :key="vault.id">
+        <vaults-component :vault="vault" />
       </div>
     </div>
   </div>
@@ -27,11 +35,13 @@ export default {
     const route = useRoute()
     const state = reactive({
       profile: computed(() => AppState.currentProfile),
-      keeps: computed(() => AppState.currentKeeps)
+      keeps: computed(() => AppState.currentKeeps),
+      vaults: computed(() => AppState.currentVaults)
     })
     onMounted(() => {
       profilesService.getProfile(route.params.id)
       profilesService.getKeepsByProfile(route.params.id)
+      profilesService.getVaultsByProfile(route.params.id)
     })
     return {
       state,
