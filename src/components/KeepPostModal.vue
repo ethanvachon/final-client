@@ -1,3 +1,4 @@
+/* eslint-disable vue/one-component-per-file */
 <template>
   <!-- Button trigger modal -->
   <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#keepPost">
@@ -39,6 +40,7 @@
 <script>
 import { reactive } from 'vue'
 import { keepsService } from '../services/KeepsService'
+import Swal from 'sweetalert2'
 export default {
   setup() {
     const state = reactive({
@@ -47,6 +49,22 @@ export default {
     return {
       state,
       createVault() {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Keep Created'
+        })
         keepsService.create(state.newKeep)
         state.newKeep = {}
       }

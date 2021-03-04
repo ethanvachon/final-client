@@ -62,6 +62,7 @@ export default {
     position: absolute;
     top: 20px;
     right: 20px;
+    cursor: pointer;
   }
   .img-fluid {
     border-radius: 5px;

@@ -91,11 +91,7 @@ export default {
     })
     return {
       state,
-      test() {
-        console.log(props.keep)
-      },
       deleteKeep() {
-        // confirm('are you sure you want to delete')
         Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -127,6 +123,7 @@ export default {
 }
 </script>
 <style scoped>
+@import "../assets/color.css";
 #modal-stats{
   width: 10vw;
 }

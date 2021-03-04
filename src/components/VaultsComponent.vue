@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <router-link :to="{name: 'Vault', params: {id: vault.id}}">
+    <router-link style="text-decoration: none; color: inherit;" :to="{name: 'Vault', params: {id: vault.id}}">
       <div class="card-body">
         <h4 class="card-title">
           {{ vault.name }}
@@ -15,5 +15,4 @@ export default {
 }
 </script>
 <style scoped>
-
 </style>
