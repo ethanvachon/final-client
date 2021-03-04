@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="masonry mt-3">
-      <keeps-component v-for="keep in state.keeps" :key="keep.id" :keep="keep" :page="'home'" />
+      <keeps-component v-for="keep in state.keeps" :key="keep.id" :keep="keep" />
     </div>
   </div>
 </template>

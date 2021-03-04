@@ -75,6 +75,7 @@
 import { reactive, computed } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
+import { profilesService } from '../services/ProfilesService'
 import { accountService } from '../services/AccountService'
 import { vaultKeepsService } from '../services/VaultKeepsService'
 import Swal from 'sweetalert2'
@@ -103,13 +104,10 @@ export default {
           confirmButtonColor: '#2a93ad',
           cancelButtonColor: '#d33',
           confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
+        }).then(async(result) => {
           if (result.isConfirmed) {
-            Swal.fire(
-              'Deleted!'
-            )
-            keepsService.delete(props.keep.id)
-            keepsService.getKeeps()
+            await keepsService.delete(props.keep.id)
+            profilesService.getKeepsByProfile(state.account.id)
           }
         })
       },
