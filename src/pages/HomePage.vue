@@ -1,11 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <h1>Keeps</h1>
-      </div>
-    </div>
-    <div class="masonry">
+    <div class="masonry mt-3">
       <keeps-component v-for="keep in state.keeps" :key="keep.id" :keep="keep" :page="'home'" />
     </div>
   </div>

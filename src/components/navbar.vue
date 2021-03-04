@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark blue-bg">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <h2>Keepr</h2>
@@ -26,7 +26,7 @@
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn btn-outline-light text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -94,6 +94,10 @@ export default {
 </script>
 
 <style scoped>
+@import "../assets/color.css";
+.blue-bg {
+  background-color: var(--blue);
+}
 .dropdown-menu {
   user-select: none;
   display: block;
@@ -113,6 +117,6 @@ a:hover {
   text-transform: uppercase;
 }
 .nav-item .nav-link.router-link-exact-active{
-  color: var(--primary);
+  color: whitesmoke;
 }
 </style>
